@@ -9,6 +9,18 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAnyOrigin",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -19,5 +31,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowAnyOrigin");
 
 app.Run();

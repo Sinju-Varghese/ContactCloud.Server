@@ -1,5 +1,10 @@
 ﻿namespace ContactCloud.Common.Types;
 
-public class ResultTypes
+public enum ResultTypes
 {
+    Success,
+    InvalidData,
+    NotFound,
+    CompletedWithErrors,
+    PermissionDenied
 }
