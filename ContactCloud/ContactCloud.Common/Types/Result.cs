@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ContactCloud.Common.Types;
 
-namespace ContactCloud.Common.Types
+public class Result
 {
-    internal class Result
-    {
-    }
 }

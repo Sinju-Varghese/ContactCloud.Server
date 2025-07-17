@@ -10,4 +10,10 @@
     <ProjectReference Include="..\ContactCloud.WebApi\ContactCloud.WebApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
