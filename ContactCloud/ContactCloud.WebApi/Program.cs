@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ContactCloud.Entity.Data;  
+using ContactCloud.Entity.Model;  
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +13,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Services.AddDbContext<ContactCloudDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("ContactCloud.Entity")
+    ));
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<ContactCloudDbContext>()
+    .AddDefaultTokenProviders();
+
+
 
 //CORS
 builder.Services.AddCors(options =>
@@ -21,6 +37,10 @@ builder.Services.AddCors(options =>
         });
 });
 
+var app = builder.Build();
+
+app.UseCors("AllowAnyOrigin");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -31,7 +51,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseCors("AllowAnyOrigin");
 
 app.Run();
