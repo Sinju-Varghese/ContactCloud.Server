@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-   
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ContactCloud.Common\ContactCloud.Common.csproj" />
     <ProjectReference Include="..\ContactCloud.Entity\ContactCloud.Entity.csproj" />
     <ProjectReference Include="..\ContactCloud.Services\ContactCloud.Services.csproj" />

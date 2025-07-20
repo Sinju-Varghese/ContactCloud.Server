@@ -25,7 +25,11 @@ public class Result<TData>
     {
         ResultType = resultType;
     }
-
+    public Result(TData data)
+    {
+        Data = data;
+        ResultType = ResultTypes.Success;
+    }
     public Result<TData> AddError(string error, ResultTypes type)
     {
         Errors.Add(error);
