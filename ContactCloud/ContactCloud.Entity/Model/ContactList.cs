@@ -1,6 +1,10 @@
-﻿namespace ContactCloud.Services.Dto.Contact;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using ContactCloud.Entity.Model;
 
-public class ContactViewDto
+namespace ContactCloud.Entity.Models;
+
+[Table("ContactList")]
+public class ContactList
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
@@ -10,4 +14,6 @@ public class ContactViewDto
     public string Address { get; set; }
 
     public string UserId { get; set; }
+    public ApplicationUser User { get; set; }
+
 }

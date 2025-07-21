@@ -1,16 +1,17 @@
 ﻿using ContactCloud.Entity.Model;
+using ContactCloud.Entity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactCloud.Entity.Data
 {
-    public class ContactCloudDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ContactCloudDbContext : IdentityDbContext<ApplicationUser>
     {
         public ContactCloudDbContext(DbContextOptions<ContactCloudDbContext> options)
             : base(options) { }
 
         
-         public DbSet<Contact> Contacts { get; set; }
+         public DbSet<ContactList> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

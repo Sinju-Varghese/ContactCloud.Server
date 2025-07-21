@@ -5,7 +5,10 @@ namespace ContactCloud.Services.Repository;
 
 public interface IContactRepository
 {
-    Task<Result<long?>> CreateContactAsync(ContactCreateDto model, string userId);
-    Task<Result<bool>> DeleteContactAsync(long contactId);
+    Task<Result<int?>> CreateContactAsync(ContactCreateDto dto);
+    Task<Result<bool>> UpdateContactAsync(int id, ContactUpdateDto dto);
+    Task<Result<bool>> DeleteContactAsync(int id);
+    Task<Result<ContactViewDto[]>> GetAllContactsAsync();
+    Task<Result<ContactViewDto?>> GetByIdAsync(int id);
 
 }

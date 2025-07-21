@@ -30,7 +30,10 @@ namespace ContactCloud.Services.Validators
             RuleFor(x => x.Address)
                 .MaximumLength(200)
                 .WithMessage("Address cannot exceed 200 characters.");
-                            
+
+            RuleFor(x => x.UserId)
+                .NotEmpty().WithMessage("UserId is Required.");
+                           
         }
     }
 }

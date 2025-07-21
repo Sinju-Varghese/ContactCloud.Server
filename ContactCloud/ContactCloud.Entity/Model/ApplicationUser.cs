@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using ContactCloud.Entity.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ContactCloud.Entity.Model;
 
-public class ApplicationUser : IdentityUser<string>
+public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public DateTime CreatedAt { get; set; }
-
+    public ICollection<ContactList> Contacts { get; set; }
 }

@@ -15,10 +15,5 @@ public class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
         builder.Property(u => u.LastName)
             .HasMaxLength(50)
             .IsRequired();
-
-        builder.Property(u => u.CreatedAt)
-            .HasColumnType("datetime")
-            .IsRequired();
-
     }
 }

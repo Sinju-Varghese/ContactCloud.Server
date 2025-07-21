@@ -55,7 +55,7 @@ builder.Services.AddDbContext<ContactCloudDbContext>(options =>
         b => b.MigrationsAssembly("ContactCloud.Entity")
     ));
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+builder.Services.AddIdentity<ApplicationUser , IdentityRole>()
     .AddEntityFrameworkStores<ContactCloudDbContext>()
     .AddDefaultTokenProviders();
 
@@ -63,6 +63,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<RegisterUserValidator>();
 builder.Services.AddScoped<IValidator<RegisterRequestDto>, RegisterUserValidator>();
 builder.Services.AddScoped<IValidator<SignInDto>, SignInValidator>();
 builder.Services.AddScoped<IValidator<ContactCreateDto>, ContactCreateDtoValidator>();
+builder.Services.AddScoped<IValidator<ContactUpdateDto>, ContactUpdateDtoValidator>();
 
 
 builder.Services.AddAuthentication(options =>

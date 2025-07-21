@@ -15,7 +15,6 @@ public class AuthRepository : IAuthRepository
 {
     private readonly UserManager<ApplicationUser> _userManager;
     public readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly RoleManager<ApplicationRole> _roleManager;
     private readonly ITokenRepository _tokenRepository;
     private readonly IValidator<RegisterRequestDto> _registerUserValidator;
     private readonly IValidator<SignInDto> _signInValidator;
@@ -25,7 +24,6 @@ public class AuthRepository : IAuthRepository
     public AuthRepository(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        RoleManager<ApplicationRole> roleManager,
         ITokenRepository tokenRepository,
         IValidator<RegisterRequestDto> registerUserValidator,
         IValidator<SignInDto> signInValidator,
@@ -34,7 +32,6 @@ public class AuthRepository : IAuthRepository
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _roleManager = roleManager;
         _tokenRepository = tokenRepository;
         _registerUserValidator = registerUserValidator;
         _signInValidator = signInValidator;
@@ -148,7 +145,7 @@ public class AuthRepository : IAuthRepository
             Email = request.Email,
             FirstName = request.FirstName,
             LastName = request.LastName,
-            CreatedAt = DateTime.UtcNow,
+            //CreatedAt = DateTime.UtcNow,
         };
 
         var identityResult = await _userManager.CreateAsync(user, request.Password);
@@ -160,25 +157,25 @@ public class AuthRepository : IAuthRepository
         }
 
         // 4. Ensure "user" role exists
-        if (!await _roleManager.RoleExistsAsync(ApplicationRoles.User))
-        {
-            await _roleManager.CreateAsync(new ApplicationRole()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = ApplicationRoles.User,
-                NormalizedName = ApplicationRoles.User.ToUpperInvariant(),
-                ConcurrencyStamp = Guid.NewGuid().ToString()
-            });
-        }
+        //if (!await _roleManager.RoleExistsAsync(ApplicationRoles.User))
+        //{
+        //    await _roleManager.CreateAsync(new ApplicationRole()
+        //    {
+        //        Id = Guid.NewGuid().ToString(),
+        //        Name = ApplicationRoles.User,
+        //        NormalizedName = ApplicationRoles.User.ToUpperInvariant(),
+        //        ConcurrencyStamp = Guid.NewGuid().ToString()
+        //    });
+        //}
 
         // 5. Assign user to "user" role
-        var roleResult = await _userManager.AddToRoleAsync(user, ApplicationRoles.User);
-        if (!roleResult.Succeeded) 
-        {
-            var roleErrors = roleResult.Errors.Select(e => e.Description);
-            return new Result<string>(ResultTypes.CompletedWithErrors)
-                .AddError("User registered, but failed to assign role: " + string.Join("; ", roleErrors), ResultTypes.CompletedWithErrors);
-        }
+        //var roleResult = await _userManager.AddToRoleAsync(user, ApplicationRoles.User);
+        //if (!roleResult.Succeeded) 
+        //{
+        //    var roleErrors = roleResult.Errors.Select(e => e.Description);
+        //    return new Result<string>(ResultTypes.CompletedWithErrors)
+        //        .AddError("User registered, but failed to assign role: " + string.Join("; ", roleErrors), ResultTypes.CompletedWithErrors);
+        //}
 
         // 6. Return user ID
         return new Result<string>(user.Id);
